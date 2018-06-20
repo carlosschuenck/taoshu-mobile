@@ -1,0 +1,8 @@
+{
+  "name": "taoshu-mobile",
+  "app_id": "734e9994",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
