@@ -8,6 +8,9 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {ComponentsModule} from "../components/components.module";
+import {PresencaListPage} from "../pages/presenca/presenca-list/presenca-list";
+import {PresencaListPageModule} from "../pages/presenca/presenca-list/presenca-list.module";
 
 @NgModule({
   declarations: [
@@ -17,13 +20,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
+    PresencaListPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    PresencaListPage
   ],
   providers: [
     StatusBar,
