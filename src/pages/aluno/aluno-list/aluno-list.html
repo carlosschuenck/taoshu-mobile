@@ -1,5 +1,5 @@
 <!--
-  Generated template for the PresencaListPage page.
+  Generated template for the AlunoListPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,21 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Lista de Presenças</ion-title>
+    <ion-title>Alunos</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
   <ion-list>
-    <ion-item *ngFor="let presenca of listPresenca">
+    <ion-item *ngFor="let aluno of listAlunos">
       <ion-thumbnail item-start>
         <img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg">
       </ion-thumbnail>
-      <h2>{{presenca.aluno.nomeCompleto}}</h2>
-      <p>{{presenca.presenca ? 'Presente ' : 'Faltou '}} em {{formatData(presenca.data)}}</p>
+      <h2>{{aluno.nomeCompleto}}</h2>
+      <p>Professor: {{aluno.turma.professor.nomeCompleto}}</p>
+      <p>Turma: {{aluno.turma.diaSemana}} de {{aluno.turma.horaInicio}} até {{aluno.turma.horaFim}}</p>
     </ion-item>
   </ion-list>
 </ion-content>
