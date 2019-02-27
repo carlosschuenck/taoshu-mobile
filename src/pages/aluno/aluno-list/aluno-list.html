@@ -5,23 +5,46 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Alunos</ion-title>
-  </ion-navbar>
-
+  </ion-navbar>  
 </ion-header>
 
-
 <ion-content padding>
+  <ion-refresher (ionRefresh)="findAll($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-fab right top>
+    <button ion-fab color="dark" class="fab-size" (click)="openForm(null, false)">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
   <ion-list>
-    <ion-item *ngFor="let aluno of listAlunos">
-      <ion-thumbnail item-start>
-        <img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg">
-      </ion-thumbnail>
-      <h2>{{aluno.nomeCompleto}}</h2>
-      <p>Professor: {{aluno.turma.professor.nomeCompleto}}</p>
-      <p>Turma: {{aluno.turma.diaSemana}} de {{aluno.turma.horaInicio}} até {{aluno.turma.horaFim}}</p>
+  <ion-item-sliding *ngFor="let aluno of listAlunos">
+    <ion-item (click)="openForm(aluno, true)">
+        <ion-thumbnail item-start>
+         <!-- <img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg">-->
+          <img src="assets/imgs/avatar.png">
+        </ion-thumbnail>
+        <h2>{{aluno.nomeCompleto}}</h2>
+        <p>Professor: {{aluno.turma?.professor?.nomeCompleto}}</p>
+        <p>Turma: {{aluno.turma?.diaSemana}} de {{aluno.turma?.horaInicio}} até {{aluno.turma?.horaFim}}</p>
     </ion-item>
-  </ion-list>
+    <ion-item-options side="right">
+      <button ion-button color="default" (click)="openForm(aluno, false)">
+        <ion-icon name="create"></ion-icon>
+        Editar
+      </button>
+      <button ion-button color="danger" (click)="deletar(aluno)">
+        <ion-icon name="trash"></ion-icon>
+        Deletar
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
 </ion-content>

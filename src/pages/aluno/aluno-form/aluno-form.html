@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>aluno-form</ion-title>
+    <ion-title>{{headerLabel}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,4 +15,37 @@
 
 <ion-content padding>
 
+  <ion-row center>
+      <div text-center>
+          <img src="assets/imgs/avatar.png" class="slide-image">
+      </div>
+  </ion-row>
+  
+  <ion-item>
+    <ion-label floating>Nome completo:</ion-label>
+    <ion-input type="text" [(ngModel)]="aluno.nomeCompleto" [disabled]="isReadyOnly"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Data de nascimento:</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="aluno.dataNascimento"
+      [disabled]="isReadyOnly"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Nome da mãe:</ion-label>
+    <ion-input type="text" [(ngModel)]="aluno.nomeMae" [disabled]="isReadyOnly"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Nome da pai:</ion-label>
+    <ion-input type="text" [(ngModel)]="aluno.nomePai" [disabled]="isReadyOnly"></ion-input>
+  </ion-item>
+
+
+  <ion-row center *ngIf="!isReadyOnly">
+    <ion-col text-center>
+      <button ion-button round (click)="save()">Salvar</button>
+    </ion-col>
+  </ion-row>
 </ion-content>

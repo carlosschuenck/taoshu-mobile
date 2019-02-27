@@ -6,8 +6,11 @@ import { AlunoFormPage } from './aluno-form';
   declarations: [
     AlunoFormPage,
   ],
+  entryComponents:[
+    AlunoFormPage
+  ],
   imports: [
-    IonicPageModule.forChild(AlunoFormPage),
+    IonicPageModule.forChild(AlunoFormPage)
   ],
 })
 export class AlunoFormPageModule {}
