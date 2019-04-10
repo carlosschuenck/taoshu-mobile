@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>Turmas</ion-title>
+
+    <ion-buttons end>
+      <button color="dark" ion-button icon-only (click)="openForm(null, false)">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="findAll($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="turmas.length">
+    <ion-item-sliding *ngFor="let turma of turmas">
+      <ion-item (click)="openForm(turma, true)">
+        <h2>Turma: {{ turma.diaSemana }} de {{ turma.horaInicio }} até {{ turma.horaFim }}</h2>
+        <p>Professor: <b>{{ turma.professor?.nomeCompleto }}</b></p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="default" (click)="openForm(turma, false)">
+          <ion-icon name="create"></ion-icon>Editar
+        </button>
+        <button ion-button color="danger" (click)="deletar(turma)">
+          <ion-icon name="trash"></ion-icon>Deletar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

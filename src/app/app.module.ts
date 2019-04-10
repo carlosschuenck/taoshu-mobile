@@ -14,6 +14,11 @@ import { DatePipe, CommonModule } from '@angular/common';
 import { AlunoModule } from '../pages/aluno/aluno.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Dialogs } from '@ionic-native/dialogs';
+import { TurmaPageModule } from '../pages/turma/turma.module';
+import { ProfessorPageModule } from '../pages/professor/professor.module';
+import { TurmaProvider } from '../providers/turma/turma-provider';
+import { ProfessorProvider } from '../providers/professor/professor-provider';
+import { PresencaProvider } from '../providers/presenca/presenca-provider';
 
 @NgModule({
   declarations: [
@@ -26,6 +31,8 @@ import { Dialogs } from '@ionic-native/dialogs';
     IonicModule.forRoot(MyApp),
     PresencaListPageModule,
     AlunoModule,
+    TurmaPageModule,
+    ProfessorPageModule,
     HttpClientModule,
     CommonModule, 
   ],
@@ -41,6 +48,9 @@ import { Dialogs } from '@ionic-native/dialogs';
     SplashScreen,
     Dialogs,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    TurmaProvider,
+    ProfessorProvider,
+    PresencaProvider,
   ]
 })
 export class AppModule {}

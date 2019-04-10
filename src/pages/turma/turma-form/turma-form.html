@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ headerLabel }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Dia da semana:</ion-label>
+      <ion-select [(ngModel)]="turma.diaSemana" [disabled]="isReadyOnly">
+        <ion-option *ngFor="let dia of diasDaSemana" value="{{dia}}">{{dia}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label floating>Horário de início:</ion-label>
+    <ion-datetime displayFormat="HH:mm" [(ngModel)]="turma.horaInicio" [disabled]="isReadyOnly"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Horário de termino:</ion-label>
+    <ion-datetime displayFormat="HH:mm" [(ngModel)]="turma.horaFim" [disabled]="isReadyOnly"></ion-datetime>
+  </ion-item>
+
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Professor:</ion-label>
+      <ion-select [(ngModel)]="turma.professor.id" [disabled]="isReadyOnly">
+        <ion-option *ngFor="let professor of professores" value="{{ professor.id }}">{{ professor.nomeCompleto }}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-row center *ngIf="!isReadyOnly">
+    <ion-col text-center>
+      <button ion-button round (click)="save()">Salvar</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

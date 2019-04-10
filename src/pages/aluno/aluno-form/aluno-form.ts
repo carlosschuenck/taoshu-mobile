@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Aluno } from '../../../shared/model/aluno';
-import { AlunoProvider } from '../../../providers/aluno/aluno';
-
-/**
- * Generated class for the AlunoFormPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AlunoProvider } from '../../../providers/aluno/aluno-provider';
+import { Turma } from '../../../shared/model/turma';
+import { TurmaProvider } from '../../../providers/turma/turma-provider';
 
 @IonicPage()
 @Component({
@@ -17,37 +12,38 @@ import { AlunoProvider } from '../../../providers/aluno/aluno';
 })
 export class AlunoFormPage {
 
-  private aluno: Aluno = {};
-  private isReadyOnly: boolean;
-  private headerLabel: string
-  
-  constructor(public navCtrl: NavController, 
+  public aluno: Aluno = { turma: { id: null} };
+  public turmas: Array<Turma> = [];
+  public isReadyOnly: boolean;
+  public headerLabel: string;
+
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private alunoProvider: AlunoProvider,
+              private turmaProvider: TurmaProvider,
               private toast: ToastController) {
+    this.isReadyOnly = this.navParams.get('isReadyOnly');
+  }
 
-   this.isReadyOnly = this.navParams.get('isReadyOnly');
-   var alunoId = this.navParams.get('alunouId');
-   
-   
-   if(this.isReadyOnly)
+  ionViewWillEnter(){
+    var alunoId = this.navParams.get('alunouId');
+
+    if(this.isReadyOnly)
       this.headerLabel = "Visualizar Aluno";
-   else if(alunoId)
+    else if(alunoId)
       this.headerLabel = "Editar Aluno";
-   else
+    else
       this.headerLabel = "Cadastrar Aluno"
-   
-  
-   this.alunoProvider.findById(alunoId).subscribe(
-      resp => this.aluno = resp,
-      err => console.error(err)
-    )
+
+
+    this.alunoProvider.findById(alunoId)
+                      .subscribe(resp => this.aluno = resp);
+
+    this.turmaProvider.findAll()
+                      .subscribe(turmas => this.turmas = turmas);
   }
 
-  ionViewDidLoad() {
-  }
-
-  save(){ 
+  save(){
     if(this.aluno.id){
       this.alunoProvider.update(this.aluno).subscribe(
         () => {

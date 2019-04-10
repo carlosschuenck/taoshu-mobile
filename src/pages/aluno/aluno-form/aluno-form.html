@@ -1,9 +1,3 @@
-<!--
-  Generated template for the AlunoFormPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -14,13 +8,14 @@
 
 
 <ion-content padding>
+  
 
   <ion-row center>
-      <div text-center>
+      <div text-center class="photo">
           <img src="assets/imgs/avatar.png" class="slide-image">
       </div>
   </ion-row>
-  
+
   <ion-item>
     <ion-label floating>Nome completo:</ion-label>
     <ion-input type="text" [(ngModel)]="aluno.nomeCompleto" [disabled]="isReadyOnly"></ion-input>
@@ -42,10 +37,27 @@
     <ion-input type="text" [(ngModel)]="aluno.nomePai" [disabled]="isReadyOnly"></ion-input>
   </ion-item>
 
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Turma:</ion-label>
+      <ion-select [(ngModel)]="aluno.turma.id" [disabled]="isReadyOnly">
+        <ion-option *ngFor="let turma of turmas" value="{{ turma.id }}">
+          <!-- {{turma.diaSemana}} de {{turma.horaInicio}} até {{turma.horaFim}}
+          <p>{{ turma.professor?.nomeCompleto }}</p> -->
+          <ion-item>
+              <label>{{ turma.diaSemana }} de {{ turma.horaInicio }} até {{ turma.horaFim }} - {{ turma.professor?.nomeCompleto }}</label>
+          </ion-item>
+        </ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
 
   <ion-row center *ngIf="!isReadyOnly">
     <ion-col text-center>
       <button ion-button round (click)="save()">Salvar</button>
     </ion-col>
   </ion-row>
+
+
 </ion-content>

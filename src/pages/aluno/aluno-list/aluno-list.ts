@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AlunoProvider } from '../../../providers/aluno/aluno';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AlunoProvider } from '../../../providers/aluno/aluno-provider';
 import { Aluno } from '../../../shared/model/aluno';
 import { DatePipe } from '@angular/common';
 import { AlunoFormPage } from '../aluno-form/aluno-form';
@@ -23,24 +23,24 @@ export class AlunoListPage {
 
   listAlunos: Array<Aluno> = []
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private alunoProvider: AlunoProvider,
               public datepipe: DatePipe,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController,
+              private toast: ToastController) {
   }
 
-
-
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.findAll();
   }
 
   findAll(refresher?){
-    this.alunoProvider.find().subscribe(
-      listAlunos => { 
+    this.alunoProvider.findAll().subscribe(
+      listAlunos => {
         this.listAlunos = listAlunos
-        if(refresher){refresher.complete()}
+        if(refresher)
+          refresher.complete();
       },
       err => console.error("erro", JSON.stringify(err))
     );
@@ -67,6 +67,7 @@ export class AlunoListPage {
           handler: () => {
             this.alunoProvider.delete(aluno.id).subscribe(
               () => {
+                this.toast.create({message: 'Aluno deletado com sucesso!', duration: 3000}).present();
                 this.findAll();
               },
               () =>{

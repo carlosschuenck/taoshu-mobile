@@ -15,6 +15,7 @@ import { Professor } from './professor';
 export interface Turma {
     horaFim?: string;
     horaInicio?: string;
+    diaSemana?: string;
     id?: number;
     professor?: Professor;
 }

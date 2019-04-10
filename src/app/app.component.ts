@@ -3,8 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { AlunoListPage } from '../pages/aluno/aluno-list/aluno-list';
 import { HomePage } from '../pages/home/home';
+import { ProfessorListPage } from '../pages/professor/professor-list/professor-list';
 
 @Component({
   templateUrl: 'app.html'
